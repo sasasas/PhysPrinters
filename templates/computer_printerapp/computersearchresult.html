@@ -1,0 +1,26 @@
+<html>
+
+<head>
+	<title>Printer installer - Available printers</title>	
+	<link rel="stylesheet" href="style_sheet.css">
+</head>
+
+<body>
+
+{% if currentcomputer %}
+
+	<p>Your computer: {{ currentcomputer }}</p>
+
+	<form action="/printers/searchcomputer/submitrequest/" method="post">
+		{{ printerform }}
+		<input type="submit" value="Submit">
+	</form>
+
+{% else %}
+	
+ 	<p>Your computer has not been recognised. Please e-mail IT Support for assistance.</p>
+
+{% endif %}
+
+</body>
+</html>

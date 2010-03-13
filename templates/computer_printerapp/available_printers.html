@@ -1,0 +1,28 @@
+<html>
+
+<head>
+	<title>Printer installer - Available printers</title>	
+	<link rel="stylesheet" href="style_sheet.css">
+</head>
+
+<body>
+
+{% if currentcomputer %}
+
+	<p>Your computer: {{ currentcomputer }}</p>
+
+	<form action="" method="post">
+		{{ printerform }}
+		<input type="submit" value="Submit">
+	</form>
+
+{% else %}
+	
+	{% include 'computer_printerapp/computersearch.html' %}
+
+{% endif %}
+
+
+
+</body>
+</html>
