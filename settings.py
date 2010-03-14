@@ -82,14 +82,8 @@ INSTALLED_APPS = (
 	'computer_printer',
 )
 
-EMAIL_HOST = (
-	'localhost',
-)
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '1025'
+SERVER_EMAIL = 'root@django.localdomain'
 
-EMAIL_PORT = (
-	'25',
-)
-
-EMAIL_SUBJECT_PREFIX = (
-	'[Django] Computer_printerapp ',
-)
+EMAIL_SUBJECT_PREFIX = '[Django] Computer_printerapp '

@@ -10,26 +10,24 @@ def home(request):
 	return render_to_response('computer_printerapp/homepage.html')
 
 def printers(request):
-	#return HttpResponse("Printers test.")	
-	#try:		
-	#IPvalue = request.META['REMOTE_ADDR']
-	#except KeyError:
-		#form2 = CPinstallFormPART2()		
-		#return render_to_response('computer_printerapp/available_printers.no_ip.html', {'printerform2': form2, 'printer_list': Printer.objects.all()})
 	if request.method == 'POST':	
-		IPvalue = request.META['REMOTE_ADDR']		
+		IPvalue = request.session['IPvalue']		
 		currentcomputer = Computer.objects.get(IPaddress=IPvalue)	
 		printerform = InstallRequestForm(request.POST)
 		if printerform.is_valid():
 			cd = printerform.cleaned_data
 			mail_admins(
 				cd['computer_name'],
-				cd.get('printer_name', 'email'),
+				"%s: %s" % (cd['email'], cd.get('printer_name')),
 				fail_silently=False
 			)
 			return HttpResponseRedirect('/confirmation/')
 	else:
-		IPvalue = request.META['REMOTE_ADDR']		
+		try:		
+			IPvalue = request.META['REMOTE_ADDR']
+		except KeyError:
+			return searchcomputer(request)
+		request.session['IPvalue'] = IPvalue		
 		currentcomputer = Computer.objects.get(IPaddress=IPvalue)		
 		printerform = InstallRequestForm()
 			#initial={'computer_name': currentcomputer}
